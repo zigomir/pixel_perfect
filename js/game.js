@@ -11,17 +11,14 @@ $(function() {
 
   $playground.startGame(function(){
     var dev = new Developer("destroyer");
-    var designer = new Designer("pansy");
+    var designer = new Designer("designer");
 
-    $playground.addSprite(dev.type, dev.getSprite());
-    $playground.addSprite(designer.type, designer.getSprite());
+    $playground.addSprite(dev.id, dev.getSprite());
+    $playground.addSprite(designer.id, designer.getSprite());
   });
 
-
-  console.log($("#destroyer").hp);
-
   $playground.registerCallback(function() {
-    $("#pansy").x(-10, true);
+    $("#designer_1").x(-10, true);
   }, REFRESH_RATE);
 
 });
