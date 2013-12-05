@@ -5,8 +5,6 @@ function Projectile(type, $playground, shooter) {
   var HEIGHT = 32;
 
   this.damage          = 20;
-  this.id              = type + "_" + (Object.keys(this.objectCollection).length + 1);
-  this.objectCollection[this.id] = this;
 
   this.animations = [
     new $.gQ.Animation({

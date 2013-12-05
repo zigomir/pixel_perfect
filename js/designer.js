@@ -6,9 +6,6 @@ function Designer(type, $playground, lane) {
   this.ap   = 10;
   this.cost = 10;
 
-  this.id   = type + "_" + (Object.keys(this.objectCollection).length + 1);
-  this.objectCollection[this.id] = this;
-
   this.animation = new $.gQ.Animation({
     imageURL: "img/sprite.png",
     numberOfFrame: 3,

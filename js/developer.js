@@ -6,9 +6,6 @@ function Developer(type, $playground, lane) {
   this.hp   = 100;
   this.ap   = 100;
   this.cost = 10;
-  this.id   = type + "_" + (Object.keys(this.objectCollection).length + 1);
-
-  this.objectCollection[this.id] = this;
 
   var that = this;
   this.checkCollision = function() {

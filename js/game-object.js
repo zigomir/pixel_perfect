@@ -7,6 +7,10 @@ gameObjects = {
 function GameObject(type) {
 	this.type = type;
 	this.objectCollection = gameObjects[this.type + "s"];
+	if(type) {
+		this.id = type + "_" + (Object.keys(this.objectCollection).length + 1);
+	  this.objectCollection[this.id] = this;
+	}
 }
 
 GameObject.prototype.remove = function() {
