@@ -12,7 +12,7 @@ function Developer(type) {
   this.animation = new $.gQ.Animation({
     imageURL: "img/sprite.png",
     numberOfFrame: 3,
-    delta: 16,
+    delta: 64,
     rate: 150,
     type: $.gQ.ANIMATION_HORIZONTAL | $.gQ.ANIMATION_PINGPONG
   });
@@ -20,8 +20,8 @@ function Developer(type) {
   this.getSprite = function() {
     return {
       animation: this.animation,
-      height: 32,
-      width: 16
+      height: 128,
+      width: 64
     };
   }
 }

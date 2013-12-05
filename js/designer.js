@@ -12,18 +12,18 @@ function Designer(type) {
   this.animation = new $.gQ.Animation({
     imageURL: "img/sprite.png",
     numberOfFrame: 3,
-    delta: 16,
+    delta: 64,
     rate: 150,
     offsetx: 0,
-    offsety: 96,
+    offsety: 384,
     type: $.gQ.ANIMATION_HORIZONTAL | $.gQ.ANIMATION_PINGPONG
   });
 
   this.getSprite = function() {
     return {
       animation: this.animation,
-      height: 32,
-      width: 16,
+      height: 128,
+      width: 64,
       posx: 500,
       posy: 0
     };
