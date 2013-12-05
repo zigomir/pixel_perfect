@@ -2,25 +2,63 @@ var OPTIONS = {
   "refreshRate": 60,
   "laneHeight": 128,
   "laneCount": 6,
-  "playgroundWidth": 600
+  "playgroundWidth": 600,
+  "initialBalance": 500,
+};
+
+var $playground, $purchaseObject;
+var bankAccount = {
+  balance: 0,
+
+  updateBalance: function(newValue) {
+    this.balance = newValue;
+    $(".balance").text(this.balance);
+  },
+  decreaseBalance: function(decreaseValue) {
+    this.updateBalance(this.balance - decreaseValue);
+  },
+  increaseBalance: function(increaseValue) {
+    this.updateBalance(this.balance + increaseValue);
+  }
 };
 
 $(function() {
 
-  var $playground = $("#playground");
+  bankAccount.updateBalance(OPTIONS.initialBalance);
+
+  $("#shop .developer").click(function(e) {
+    $(e.currentTarget).addClass('purchased');
+    $purchaseObject = $(e.currentTarget);
+  });
+
+  $playground = $("#playground");
+  $playground.click(function() {
+    if ($purchaseObject === undefined || $purchaseObject.length === 0) {
+      return;
+    }
+
+    var mouseY    = $.gQ.mouseTracker.y;
+    var lane      = Math.ceil(mouseY / OPTIONS.laneHeight);
+    var typeCost  = parseInt($purchaseObject.data("cost"), 10);
+
+    if (bankAccount.balance > typeCost) {
+      bankAccount.decreaseBalance(typeCost);
+      new Developer($purchaseObject.data("type"), $playground, lane);
+    }
+  });
 
   $playground.playground({
     height: OPTIONS.laneHeight * OPTIONS.laneCount,
     width: OPTIONS.playgroundWidth,
-    refreshRate: OPTIONS.refreshRate
+    refreshRate: OPTIONS.refreshRate,
+    mouseTracker: true
   });
 
-  $playground.startGame(function(){
-    var developer = new Developer("developer", $playground, 1);
-    var developer2 = new Developer("developer", $playground, 2);
-    var developer3 = new Developer("developer", $playground, 3);
 
-    var designer  = new Designer("designer", $playground, 1);
+
+  $playground.startGame(function() {
+
+    var designer   = new Designer("designer", $playground, 1);
     var designer2  = new Designer("designer", $playground, 2);
     var designer3  = new Designer("designer", $playground, 3);
   });
@@ -38,6 +76,7 @@ $(function() {
       projectile.flyToTarget();
       projectile.checkCollision();
     });
+
   }, OPTIONS.refreshRate);
 
 });

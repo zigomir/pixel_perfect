@@ -5,7 +5,7 @@ function Developer(type, $playground, lane) {
   this.type           = type;
   this.hp             = 100;
   this.ap             = 100;
-  this.cost           = 10;
+//  this.cost           = 10;
   this.id             = type + "_" + (Object.keys(developers).length + 1);
 
   developers[this.id] = this;
