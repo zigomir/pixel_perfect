@@ -36,6 +36,7 @@ $(function() {
 
     $.each(projectiles, function(index, projectile) {
       projectile.flyToTarget();
+      projectile.checkCollision();
     });
   }, OPTIONS.refreshRate);
 

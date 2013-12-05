@@ -5,7 +5,7 @@ function Projectile(type, $playground, shooter) {
   var HEIGHT = 32;
 
   this.type            = type;
-  this.damage          = 10;
+  this.damage          = 20;
 
   this.id              = type + "_" + (Object.keys(projectiles).length + 1);
   projectiles[this.id] = this;
@@ -45,6 +45,32 @@ function Projectile(type, $playground, shooter) {
       this.domElement.x(30, true);
     }
   };
+
+  var that = this;
+  this.checkCollision = function() {
+    this.domElement.collision("[id^=designer_]").each(function(index, element) {
+      that.collide(that.id, $(element).prop("id"));
+    });
+  };
+
+  this.collide = function(projectileId, designerId) {
+    var attackedDesigner = designers[designerId];
+    var projectile = projectiles[projectileId];
+    attackedDesigner.hp -= projectile.damage;
+
+    if (attackedDesigner.hp <= 0) {
+      attackedDesigner.domElement.remove();
+    }
+
+    // remove designer
+    //designer.domElement.setAnimation();
+    projectile.remove();
+  };
+
+  this.remove = function() {
+    this.domElement.remove();
+    delete projectiles[this.id];
+  }
 
   this.domElement = $("#" + this.id);
 }

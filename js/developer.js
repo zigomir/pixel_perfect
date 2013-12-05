@@ -12,7 +12,7 @@ function Developer(type, $playground, lane) {
 
   var that = this;
   this.checkCollision = function() {
-    $("#" + this.id).collision("[id^=designer_]").each(function(index, element) {
+    this.domElement.collision("[id^=designer_]").each(function(index, element) {
       that.collide(that.id, $(element).prop("id"));
     });
   };
@@ -23,11 +23,10 @@ function Developer(type, $playground, lane) {
     attackedDeveloper.hp -= designer.ap;
 
     if (attackedDeveloper.hp <= 0) {
-      attackedDeveloper.getDomElement().remove();
+      attackedDeveloper.domElement.remove();
     }
 
     // remove designer
-    designer.domElement.setAnimation();
     designer.domElement.remove();
   };
 
