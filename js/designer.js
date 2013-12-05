@@ -31,8 +31,6 @@ function Designer(type, $playground, lane) {
     }
   };
 
-  this.domElement = $("#" + this.id);
-
   this.checkWorldDomination = function() {
     if (this.domElement.x() <= -OPTIONS.slotWidth) {
       $playground.pauseGame();

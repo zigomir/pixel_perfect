@@ -63,8 +63,6 @@ function Projectile(type, $playground, shooter) {
     //designer.domElement.setAnimation();
     projectile.remove();
   };
-
-  this.domElement = $("#" + this.id);
 }
 
 Projectile.prototype = new GameObject();

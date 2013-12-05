@@ -60,8 +60,6 @@ function Developer(type, $playground, lane) {
     this.getNeighboursCount() * OPTIONS.slotWidth,
     (lane - 1) * OPTIONS.laneHeight
   );
-
-  this.domElement = $("#" + this.id);
 }
 
 Developer.prototype = new GameObject();

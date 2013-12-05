@@ -7,6 +7,7 @@ gameObjects = {
 function GameObject(type) {
 	this.type = type;
 	this.objectCollection = gameObjects[this.type + "s"];
+	this.domElement;
 	if(type) {
 		this.id = type + "_" + (Object.keys(this.objectCollection).length + 1);
 	  this.objectCollection[this.id] = this;
@@ -29,4 +30,6 @@ GameObject.prototype.createSprite = function($playground, animation, height, wid
       posy: posy || 0
     }
 	);
+
+	this.domElement = $("#" + this.id);
 };
