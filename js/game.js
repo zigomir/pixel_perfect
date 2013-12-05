@@ -23,8 +23,6 @@ $(function() {
     var designer  = new Designer("designer", $playground, 1);
     var designer2  = new Designer("designer", $playground, 2);
     var designer3  = new Designer("designer", $playground, 3);
-
-    var projectile = new Projectile("bit", $playground);
   });
 
   $playground.registerCallback(function() {
@@ -34,6 +32,10 @@ $(function() {
 
     $.each(developers, function(index, developer) {
       developer.checkCollision();
+    });
+
+    $.each(projectiles, function(index, projectile) {
+      projectile.flyToTarget();
     });
   }, OPTIONS.refreshRate);
 

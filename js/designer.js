@@ -29,13 +29,10 @@ function Designer(type, $playground, lane) {
   });
 
   this.walkToKill = function() {
-    var $domElement = this.getDomElement();
-    if ($domElement.length > 0) {
-      $domElement.x(-20, true);
+    if (this.domElement.length > 0) {
+      this.domElement.x(-5, true);
     }
   };
 
-  this.getDomElement = function() {
-    return $("#" + this.id);
-  };
+  this.domElement = $("#" + this.id);
 }

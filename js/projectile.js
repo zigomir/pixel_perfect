@@ -1,7 +1,9 @@
 var projectiles = {};
 
 // Designer character
-function Projectile(type, $playground) {
+function Projectile(type, $playground, shooter) {
+  var HEIGHT = 32;
+
   this.type            = type;
   this.damage          = 10;
 
@@ -28,17 +30,21 @@ function Projectile(type, $playground) {
       offsety: 512,
       type: $.gQ.ANIMATION_HORIZONTAL
     })
-  ]
+  ];
 
   $playground.addSprite(this.id, {
     animation: this.animations[Math.round(Math.random())],
-    height: 32,
+    height: HEIGHT,
     width: 20,
-    posx: 500,
-    posy: 50
+    posx: shooter.domElement.x() + shooter.domElement.w(),
+    posy: shooter.domElement.y() + shooter.domElement.h()/2 - HEIGHT/2
   });
 
-  this.getDomElement = function() {
-    return $("#" + this.id);
+  this.flyToTarget = function() {
+    if (this.domElement.length > 0) {
+      this.domElement.x(30, true);
+    }
   };
+
+  this.domElement = $("#" + this.id);
 }
