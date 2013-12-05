@@ -10,13 +10,17 @@ function Developer(type) {
   developers.push(this);
 
   var that = this;
-
   this.registerCollision = function() {
-    console.log("how many times i'm called");
-
     $("#" + this.id).collision("[id^=designer_]").each(function(index, element) {
-      console.log("#" + that.id + " was fucked up by "  +  $(element).prop("id"));
+      that.collide(that.id, $(element).prop("id"));
     });
+  };
+
+  this.collide = function(developerId, designerId) {
+    console.log(developerId);
+    console.log(designerId);
+
+
   };
 
   this.animation = new $.gQ.Animation({
