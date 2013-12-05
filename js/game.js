@@ -64,6 +64,7 @@ $(function() {
   $playground.registerCallback(function() {
     $.each(gameObjects.designers, function(index, designer) {
       designer.walkToKill();
+      designer.checkWorldDomination();
     });
 
     $.each(gameObjects.developers, function(index, developer) {

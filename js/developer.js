@@ -3,10 +3,10 @@ function Developer(type, $playground, lane) {
   GameObject.call(this, type);
 
   this.lane = lane;
-  this.hp             = 100;
-  this.ap             = 100;
-  this.cost           = 10;
-  this.id             = type + "_" + (Object.keys(this.objectCollection).length + 1);
+  this.hp   = 100;
+  this.ap   = 100;
+  this.cost = 10;
+  this.id   = type + "_" + (Object.keys(this.objectCollection).length + 1);
 
   this.objectCollection[this.id] = this;
 
@@ -46,8 +46,8 @@ function Developer(type, $playground, lane) {
   this.getNeighboursCount = function() {
     var count = 0;
 
-    for (var key in developers) {
-      if (this.id !== key && developers[key].lane === this.lane) {
+    for (var key in gameObjects.developers) {
+      if (this.id !== key && gameObjects.developers[key].lane === this.lane) {
         count++;
       }
     }
@@ -59,8 +59,8 @@ function Developer(type, $playground, lane) {
     $playground,
     null,
     OPTIONS.laneHeight,
-    64,
-    null,
+    OPTIONS.slotWidth,
+    this.getNeighboursCount() * OPTIONS.slotWidth,
     (lane - 1) * OPTIONS.laneHeight
   );
 
