@@ -8,6 +8,8 @@ var OPTIONS = {
   "initialDeveloperHp": 100
 };
 
+mainLoopCount = 0;
+
 var $playground, $purchaseObject;
 var bankAccount = {
   balance: 0,
@@ -60,12 +62,17 @@ $(function() {
   $playground.startGame();
 
   $playground.registerCallback(function() {
+    mainLoopCount++;
+
     $.each(gameObjects.designers, function(index, designer) {
       designer.walkToKill();
       designer.checkWorldDomination();
     });
 
     $.each(gameObjects.developers, function(index, developer) {
+      if(mainLoopCount % 5 === 0) {
+        developer.shoot(developer);
+      }
       developer.checkCollision();
     });
 
