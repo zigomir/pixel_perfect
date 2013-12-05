@@ -13,14 +13,16 @@ function Designer(type) {
     imageURL: "img/sprite.png",
     numberOfFrame: 3,
     delta: 16,
-    rate: 90,
-    type: $.gQ.ANIMATION_HORIZONTAL
+    rate: 150,
+    offsetx: 0,
+    offsety: 96,
+    type: $.gQ.ANIMATION_HORIZONTAL | $.gQ.ANIMATION_PINGPONG
   });
 
   this.getSprite = function() {
     return {
       animation: this.animation,
-      height: 16,
+      height: 32,
       width: 16,
       posx: 500,
       posy: 0

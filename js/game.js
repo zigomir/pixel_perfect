@@ -18,7 +18,7 @@ $(function() {
   });
 
   $playground.registerCallback(function() {
-    $("#designer_1").x(-10, true);
+    $("#designer_1").x(-2, true);
   }, REFRESH_RATE);
 
 });

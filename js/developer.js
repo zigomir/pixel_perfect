@@ -10,17 +10,17 @@ function Developer(type) {
   developers.push(this);
 
   this.animation = new $.gQ.Animation({
-    imageURL: "img/sprite_developer.png",
+    imageURL: "img/sprite.png",
     numberOfFrame: 3,
     delta: 16,
-    rate: 90,
-    type: $.gQ.ANIMATION_HORIZONTAL
+    rate: 150,
+    type: $.gQ.ANIMATION_HORIZONTAL | $.gQ.ANIMATION_PINGPONG
   });
 
   this.getSprite = function() {
     return {
       animation: this.animation,
-      height: 28,
+      height: 32,
       width: 16
     };
   }
