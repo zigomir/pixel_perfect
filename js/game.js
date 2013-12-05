@@ -11,7 +11,8 @@ $(function() {
 
   $playground.startGame(function(){
     var developer = new Developer("developer", $playground);
-    var designer  = new Designer("designer", $playground);
+    var designer = new Designer("designer", $playground);
+    var projectile = new Projectile("bit", $playground);
   });
 
   $playground.registerCallback(function() {
