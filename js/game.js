@@ -2,8 +2,9 @@ var OPTIONS = {
   "refreshRate": 60,
   "laneHeight": 128,
   "laneCount": 6,
+  "slotWidth": 64,
   "playgroundWidth": 600,
-  "initialBalance": 500,
+  "initialBalance": 500
 };
 
 var $playground, $purchaseObject;
@@ -54,10 +55,7 @@ $(function() {
     mouseTracker: true
   });
 
-
-
   $playground.startGame(function() {
-
     var designer   = new Designer("designer", $playground, 1);
     var designer2  = new Designer("designer", $playground, 2);
     var designer3  = new Designer("designer", $playground, 3);
