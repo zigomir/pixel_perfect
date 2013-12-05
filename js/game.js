@@ -62,15 +62,15 @@ $(function() {
   });
 
   $playground.registerCallback(function() {
-    $.each(designers, function(index, designer) {
+    $.each(gameObjects.designers, function(index, designer) {
       designer.walkToKill();
     });
 
-    $.each(developers, function(index, developer) {
+    $.each(gameObjects.developers, function(index, developer) {
       developer.checkCollision();
     });
 
-    $.each(projectiles, function(index, projectile) {
+    $.each(gameObjects.projectiles, function(index, projectile) {
       projectile.flyToTarget();
       projectile.checkCollision();
     });

@@ -1,14 +1,14 @@
-var developers = {};
-
 // Developer character
 function Developer(type, $playground, lane) {
-  this.type = type;
-  this.lane = lane;
-  this.hp   = 100;
-  this.ap   = 100;
-  this.id   = type + "_" + (Object.keys(developers).length + 1);
+  GameObject.call(this, type);
 
-  developers[this.id] = this;
+  this.lane = lane;
+  this.hp             = 100;
+  this.ap             = 100;
+  this.cost           = 10;
+  this.id             = type + "_" + (Object.keys(this.objectCollection).length + 1);
+
+  this.objectCollection[this.id] = this;
 
   var that = this;
   this.checkCollision = function() {
@@ -18,17 +18,16 @@ function Developer(type, $playground, lane) {
   };
 
   this.collide = function(developerId, designerId) {
-    var attackedDeveloper = developers[developerId];
-    var designer = designers[designerId];
+    var attackedDeveloper = gameObjects.developers[developerId];
+    var designer = gameObjects.designers[designerId];
     attackedDeveloper.hp -= designer.ap;
 
     if (attackedDeveloper.hp <= 0) {
-      attackedDeveloper.domElement.remove();
-      delete developers[developerId];
+      attackedDeveloper.remove();
     }
 
     // remove designer
-    designer.domElement.remove();
+    designer.remove();
   };
 
   this.animation = new $.gQ.Animation({
@@ -56,13 +55,17 @@ function Developer(type, $playground, lane) {
     return count;
   };
 
-  $playground.addSprite(this.id, {
-    animation: this.animation,
-    height: OPTIONS.laneHeight,
-    width: OPTIONS.slotWidth,
-    posy: (lane - 1) * OPTIONS.laneHeight,
-    posx: this.getNeighboursCount() * OPTIONS.slotWidth
-  });
+  this.createSprite(
+    $playground,
+    null,
+    OPTIONS.laneHeight,
+    64,
+    null,
+    (lane - 1) * OPTIONS.laneHeight
+  );
 
   this.domElement = $("#" + this.id);
 }
+
+Developer.prototype = new GameObject();
+Developer.prototype.constructor = Developer;

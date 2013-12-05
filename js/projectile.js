@@ -1,14 +1,13 @@
-var projectiles = {};
-
-// Designer character
+// Projectile object
 function Projectile(type, $playground, shooter) {
+  GameObject.call(this, type);
+
   var HEIGHT = 32;
 
-  this.type            = type;
   this.damage          = 20;
+  this.id              = type + "_" + (Object.keys(this.objectCollection).length + 1);
+  this.objectCollection[this.id] = this;
 
-  this.id              = type + "_" + (Object.keys(projectiles).length + 1);
-  projectiles[this.id] = this;
 
   this.animations = [
     new $.gQ.Animation({
@@ -32,13 +31,14 @@ function Projectile(type, $playground, shooter) {
     })
   ];
 
-  $playground.addSprite(this.id, {
-    animation: this.animations[Math.round(Math.random())],
-    height: HEIGHT,
-    width: 20,
-    posx: shooter.domElement.x() + shooter.domElement.w(),
-    posy: shooter.domElement.y() + shooter.domElement.h()/2 - HEIGHT/2
-  });
+  this.createSprite(
+    $playground,
+    this.animations[Math.round(Math.random())],
+    HEIGHT,
+    20,
+    shooter.domElement.x() + shooter.domElement.w(),
+    shooter.domElement.y() + shooter.domElement.h()/2 - HEIGHT/2
+  );
 
   this.flyToTarget = function() {
     if (this.domElement.length > 0) {
@@ -54,8 +54,8 @@ function Projectile(type, $playground, shooter) {
   };
 
   this.collide = function(projectileId, designerId) {
-    var attackedDesigner = designers[designerId];
-    var projectile = projectiles[projectileId];
+    var attackedDesigner = gameObjects.designers[designerId];
+    var projectile = gameObjects.projectiles[projectileId];
     attackedDesigner.hp -= projectile.damage;
 
     if (attackedDesigner.hp <= 0) {
@@ -67,10 +67,8 @@ function Projectile(type, $playground, shooter) {
     projectile.remove();
   };
 
-  this.remove = function() {
-    this.domElement.remove();
-    delete projectiles[this.id];
-  }
-
   this.domElement = $("#" + this.id);
 }
+
+Projectile.prototype = new GameObject();
+Projectile.prototype.constructor = Projectile;
