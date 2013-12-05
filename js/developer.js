@@ -28,7 +28,7 @@ function Developer(type, $playground) {
 
     // remove designer
     designer.getDomElement().setAnimation();
-    designer.getDomElement().hide();
+    designer.getDomElement().remove();
   };
 
   this.animation = new $.gQ.Animation({

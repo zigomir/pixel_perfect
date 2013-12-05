@@ -10,12 +10,14 @@ $(function() {
   });
 
   $playground.startGame(function(){
-    var dev = new Developer("developer", $playground);
-    var designer = new Designer("designer", $playground);
+    var developer = new Developer("developer", $playground);
+    var designer  = new Designer("designer", $playground);
   });
 
   $playground.registerCallback(function() {
-    $("#designer_1").x(-20, true);
+    $.each(designers, function(index, designer) {
+      designer.walkToKill();
+    });
 
     $.each(developers, function(index, developer) {
       developer.checkCollision();

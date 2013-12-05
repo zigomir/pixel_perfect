@@ -28,6 +28,13 @@ function Designer(type, $playground) {
     posy: 0
   });
 
+  this.walkToKill = function() {
+    var $domElement = this.getDomElement();
+    if ($domElement.length > 0) {
+      $domElement.x(-20, true);
+    }
+  };
+
   this.getDomElement = function() {
     return $("#" + this.id);
   };
