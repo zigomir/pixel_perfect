@@ -10,7 +10,9 @@ function Developer(type, $playground, lane) {
   var that = this;
   this.checkCollision = function() {
     this.domElement.collision("[id^=designer_]").each(function(index, element) {
-      that.collide(that.id, $(element).prop("id"));
+      if (index === 0) {
+        that.collide(that.id, $(element).prop("id"));
+      }
     });
   };
 
@@ -21,10 +23,10 @@ function Developer(type, $playground, lane) {
 
     if (attackedDeveloper.hp <= 0) {
       attackedDeveloper.remove();
+    } else {
+      // designer lost the battle
+      designer.remove();
     }
-
-    // remove designer
-    designer.remove();
   };
 
   this.animation = new $.gQ.Animation({
@@ -36,8 +38,12 @@ function Developer(type, $playground, lane) {
     type: $.gQ.ANIMATION_HORIZONTAL | $.gQ.ANIMATION_ONCE
   });
 
-  this.shoot = function() {
-    new Projectile("projectile", $playground, this);
+  this.startShooting = function() {
+    window.setInterval(this.shoot, 100, this);
+  };
+
+  this.shoot = function(that) {
+    new Projectile("projectile", $playground, that);
   };
 
   this.getNeighboursCount = function() {

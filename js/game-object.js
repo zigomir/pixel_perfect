@@ -1,16 +1,18 @@
 gameObjects = {
   developers: {},
   designers: {},
-  projectiles: {}
+  projectiles: {},
+  index: 0
 };
 
 function GameObject(type) {
 	this.type = type;
 	this.objectCollection = gameObjects[this.type + "s"];
 	this.domElement;
-	if(type) {
-		this.id = type + "_" + (Object.keys(this.objectCollection).length + 1);
-	  this.objectCollection[this.id] = this;
+
+  if(type) {
+		this.id = type + "_" + (gameObjects.index++);
+    this.objectCollection[this.id] = this;
 	}
 }
 

@@ -46,13 +46,20 @@ function Projectile(type, $playground, shooter) {
   var that = this;
   this.checkCollision = function() {
     this.domElement.collision("[id^=designer_]").each(function(index, element) {
-      that.collide(that.id, $(element).prop("id"));
+      if (index === 0) {
+        that.collide(that.id, $(element).prop("id"));
+      }
     });
   };
 
   this.collide = function(projectileId, designerId) {
     var attackedDesigner = gameObjects.designers[designerId];
     var projectile = gameObjects.projectiles[projectileId];
+
+    if (projectile === undefined) {
+      console.log("Damn undefined projectile");
+    }
+
     attackedDesigner.hp -= projectile.damage;
 
     if (attackedDesigner.hp <= 0) {

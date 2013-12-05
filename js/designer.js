@@ -3,7 +3,7 @@ function Designer(type, $playground, lane) {
   GameObject.call(this, type);
 
   this.hp   = 100;
-  this.ap   = 10;
+  this.ap   = 30;
   this.cost = 10;
 
   this.animation = new $.gQ.Animation({
@@ -34,6 +34,8 @@ function Designer(type, $playground, lane) {
   this.checkWorldDomination = function() {
     if (this.domElement.x() <= -OPTIONS.slotWidth) {
       $playground.pauseGame();
+      window.clearInterval(intervalId);
+      console.log("Game over!");
     }
   };
 }

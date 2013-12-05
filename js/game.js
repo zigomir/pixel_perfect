@@ -44,7 +44,8 @@ $(function() {
 
     if (bankAccount.balance > typeCost) {
       bankAccount.decreaseBalance(typeCost);
-      new Developer($purchaseObject.data("type"), $playground, lane);
+      var newDev = new Developer($purchaseObject.data("type"), $playground, lane);
+      newDev.startShooting();
     }
   });
 
@@ -55,11 +56,7 @@ $(function() {
     mouseTracker: true
   });
 
-  $playground.startGame(function() {
-    var designer   = new Designer("designer", $playground, 1);
-    var designer2  = new Designer("designer", $playground, 2);
-    var designer3  = new Designer("designer", $playground, 3);
-  });
+  $playground.startGame();
 
   $playground.registerCallback(function() {
     $.each(gameObjects.designers, function(index, designer) {
