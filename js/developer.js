@@ -9,6 +9,16 @@ function Developer(type) {
   this.id   = type + "_" + (developers.length + 1);
   developers.push(this);
 
+  var that = this;
+
+  this.registerCollision = function() {
+    console.log("how many times i'm called");
+
+    $("#" + this.id).collision("[id^=designer_]").each(function(index, element) {
+      console.log("#" + that.id + " was fucked up by "  +  $(element).prop("id"));
+    });
+  };
+
   this.animation = new $.gQ.Animation({
     imageURL: "img/sprite.png",
     numberOfFrame: 3,
@@ -23,5 +33,5 @@ function Developer(type) {
       height: 128,
       width: 64
     };
-  }
+  };
 }

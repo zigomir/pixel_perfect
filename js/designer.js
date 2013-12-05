@@ -27,5 +27,5 @@ function Designer(type) {
       posx: 500,
       posy: 0
     };
-  }
+  };
 }
