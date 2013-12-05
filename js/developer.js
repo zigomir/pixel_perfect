@@ -38,12 +38,26 @@ function Developer(type, $playground, lane) {
     type: $.gQ.ANIMATION_HORIZONTAL | $.gQ.ANIMATION_ONCE
   });
 
+  this.getDesignersOnLane = function() {
+    var count = 0;
+
+    for (var key in gameObjects.designers) {
+      if (gameObjects.designers[key].lane === this.lane) {
+        count++;
+      }
+    }
+
+    return count;
+  };
+
   this.startShooting = function() {
-    window.setInterval(this.shoot, 100, this);
+    window.setInterval(this.shoot, 500, this);
   };
 
   this.shoot = function(that) {
-    new Projectile("projectile", $playground, that);
+    if (that.getDesignersOnLane() > 0) {
+      new Projectile("projectile", $playground, that);
+    }
   };
 
   this.getNeighboursCount = function() {

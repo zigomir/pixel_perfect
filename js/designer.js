@@ -4,6 +4,7 @@ function Designer(type, $playground, lane) {
 
   this.hp               = 100;
   this.ap               = 30;
+  this.lane             = lane;
   // the amount of money that is earned for killing this foe
   this.healthInsurance  = 10;
 
