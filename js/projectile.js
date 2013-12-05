@@ -8,7 +8,6 @@ function Projectile(type, $playground, shooter) {
   this.id              = type + "_" + (Object.keys(this.objectCollection).length + 1);
   this.objectCollection[this.id] = this;
 
-
   this.animations = [
     new $.gQ.Animation({
       imageURL: "img/sprite.png",

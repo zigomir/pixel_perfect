@@ -40,7 +40,7 @@ function Developer(type, $playground, lane) {
   });
 
   this.shoot = function() {
-    new Projectile("bit", $playground, this);
+    new Projectile("projectile", $playground, this);
   };
 
   this.getNeighboursCount = function() {
