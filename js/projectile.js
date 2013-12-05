@@ -4,7 +4,7 @@ function Projectile(type, $playground, shooter) {
 
   var HEIGHT = 32;
 
-  this.damage          = 20;
+  this.damage = 20;
 
   this.animations = [
     new $.gQ.Animation({
@@ -56,11 +56,9 @@ function Projectile(type, $playground, shooter) {
     attackedDesigner.hp -= projectile.damage;
 
     if (attackedDesigner.hp <= 0) {
-      attackedDesigner.domElement.remove();
+      attackedDesigner.remove();
     }
 
-    // remove designer
-    //designer.domElement.setAnimation();
     projectile.remove();
   };
 }
