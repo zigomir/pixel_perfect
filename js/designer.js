@@ -1,7 +1,7 @@
 var designers = {};
 
 // Designer character
-function Designer(type, $playground) {
+function Designer(type, $playground, lane) {
   this.type = type;
   this.hp   = 100;
   this.ap   = 10;
@@ -25,7 +25,7 @@ function Designer(type, $playground) {
     height: 128,
     width: 64,
     posx: 500,
-    posy: 0
+    posy: (lane - 1) * OPTIONS.laneHeight
   });
 
   this.walkToKill = function() {

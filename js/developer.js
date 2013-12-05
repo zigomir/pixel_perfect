@@ -1,7 +1,7 @@
 var developers = {};
 
 // Developer character
-function Developer(type, $playground) {
+function Developer(type, $playground, lane) {
   this.type = type;
   this.hp   = 100;
   this.ap   = 100;
@@ -41,8 +41,9 @@ function Developer(type, $playground) {
 
   $playground.addSprite(this.id, {
     animation: this.animation,
-    height: 128,
-    width: 64
+    height: OPTIONS.laneHeight,
+    width: 64,
+    posy: (lane - 1) * OPTIONS.laneHeight
   });
 
   this.getDomElement = function() {

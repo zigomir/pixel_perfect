@@ -1,17 +1,29 @@
+var OPTIONS = {
+  "refreshRate": 60,
+  "laneHeight": 128,
+  "laneCount": 6,
+  "playgroundWidth": 600
+};
+
 $(function() {
 
   var $playground = $("#playground");
-  var REFRESH_RATE = 60;
 
   $playground.playground({
-    height: 800,
-    width: 600,
-    refreshRate: 60
+    height: OPTIONS.laneHeight * OPTIONS.laneCount,
+    width: OPTIONS.playgroundWidth,
+    refreshRate: OPTIONS.refreshRate
   });
 
   $playground.startGame(function(){
-    var developer = new Developer("developer", $playground);
-    var designer = new Designer("designer", $playground);
+    var developer = new Developer("developer", $playground, 1);
+    var developer2 = new Developer("developer", $playground, 2);
+    var developer3 = new Developer("developer", $playground, 3);
+
+    var designer  = new Designer("designer", $playground, 1);
+    var designer2  = new Designer("designer", $playground, 2);
+    var designer3  = new Designer("designer", $playground, 3);
+
     var projectile = new Projectile("bit", $playground);
   });
 
@@ -23,6 +35,6 @@ $(function() {
     $.each(developers, function(index, developer) {
       developer.checkCollision();
     });
-  }, REFRESH_RATE);
+  }, OPTIONS.refreshRate);
 
 });
