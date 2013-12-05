@@ -2,7 +2,7 @@
 function Designer(type, $playground, lane) {
   GameObject.call(this, type);
 
-  this.hp               = 100;
+  this.hp               = 250;
   this.ap               = 30;
   this.lane             = lane;
   // the amount of money that is earned for killing this foe
