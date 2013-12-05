@@ -4,7 +4,8 @@ var OPTIONS = {
   "laneCount": 6,
   "slotWidth": 64,
   "playgroundWidth": 600,
-  "initialBalance": 500
+  "initialBalance": 500,
+  "initialDeveloperHp": 100
 };
 
 var $playground, $purchaseObject;

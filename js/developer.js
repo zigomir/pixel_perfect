@@ -3,7 +3,7 @@ function Developer(type, $playground, lane) {
   GameObject.call(this, type);
 
   this.lane = lane;
-  this.hp   = 100;
+  this.hp   = OPTIONS.initialDeveloperHp;
   this.ap   = 100;
   this.cost = 10;
 
@@ -20,6 +20,7 @@ function Developer(type, $playground, lane) {
     var attackedDeveloper = gameObjects.developers[developerId];
     var designer = gameObjects.designers[designerId];
     attackedDeveloper.hp -= designer.ap;
+    attackedDeveloper.healthBar.css("width", attackedDeveloper.hp / OPTIONS.initialDeveloperHp * OPTIONS.slotWidth);
 
     if (attackedDeveloper.hp <= 0) {
       attackedDeveloper.remove();
@@ -51,7 +52,7 @@ function Developer(type, $playground, lane) {
   };
 
   this.startShooting = function() {
-    window.setInterval(this.shoot, 500, this);
+    //window.setInterval(this.shoot, 500, this);
   };
 
   this.shoot = function(that) {
@@ -80,6 +81,10 @@ function Developer(type, $playground, lane) {
     this.getNeighboursCount() * OPTIONS.slotWidth,
     (lane - 1) * OPTIONS.laneHeight
   );
+
+  var healthBar = $('<div class="health-bar" id="health-bar-' + this.id + '" style="top:' + (lane - 1) * OPTIONS.laneHeight + 'px; left: ' + this.getNeighboursCount() * OPTIONS.slotWidth + 'px"></div>');
+  $playground.append(healthBar);
+  this.healthBar = healthBar;
 }
 
 Developer.prototype = new GameObject();
