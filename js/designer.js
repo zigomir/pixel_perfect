@@ -2,9 +2,10 @@
 function Designer(type, $playground, lane) {
   GameObject.call(this, type);
 
-  this.hp   = 100;
-  this.ap   = 30;
-  this.cost = 10;
+  this.hp               = 100;
+  this.ap               = 30;
+  // the amount of money that is earned for killing this foe
+  this.healthInsurance  = 10;
 
   this.animation = new $.gQ.Animation({
     imageURL: "img/sprite.png",

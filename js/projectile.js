@@ -63,6 +63,7 @@ function Projectile(type, $playground, shooter) {
 
     if (attackedDesigner.hp <= 0) {
       attackedDesigner.remove();
+      bankAccount.increaseBalance(attackedDesigner.healthInsurance);
     }
 
     projectile.remove();
