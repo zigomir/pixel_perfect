@@ -10,18 +10,15 @@ $(function() {
   });
 
   $playground.startGame(function(){
-    var dev = new Developer("developer");
-    var designer = new Designer("designer");
-
-    $playground.addSprite(dev.id, dev.getSprite());
-    $playground.addSprite(designer.id, designer.getSprite());
+    var dev = new Developer("developer", $playground);
+    var designer = new Designer("designer", $playground);
   });
 
   $playground.registerCallback(function() {
     $("#designer_1").x(-20, true);
 
     $.each(developers, function(index, developer) {
-      developer.registerCollision();
+      developer.checkCollision();
     });
   }, REFRESH_RATE);
 

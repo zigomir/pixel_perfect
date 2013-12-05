@@ -1,26 +1,34 @@
-var developers = [];
+var developers = {};
 
 // Developer character
-function Developer(type) {
+function Developer(type, $playground) {
   this.type = type;
   this.hp   = 100;
+  this.ap   = 100;
   this.cost = 10;
 
-  this.id   = type + "_" + (developers.length + 1);
-  developers.push(this);
+  this.id   = type + "_" + (Object.keys(developers).length + 1);
+  developers[this.id] = this;
 
   var that = this;
-  this.registerCollision = function() {
+  this.checkCollision = function() {
     $("#" + this.id).collision("[id^=designer_]").each(function(index, element) {
       that.collide(that.id, $(element).prop("id"));
     });
   };
 
   this.collide = function(developerId, designerId) {
-    console.log(developerId);
-    console.log(designerId);
+    var attackedDeveloper = developers[developerId];
+    var designer = designers[designerId];
+    attackedDeveloper.hp -= designer.ap;
 
+    if (attackedDeveloper.hp <= 0) {
+      attackedDeveloper.getDomElement().remove();
+    }
 
+    // remove designer
+    designer.getDomElement().setAnimation();
+    designer.getDomElement().hide();
   };
 
   this.animation = new $.gQ.Animation({
@@ -31,11 +39,13 @@ function Developer(type) {
     type: $.gQ.ANIMATION_HORIZONTAL | $.gQ.ANIMATION_PINGPONG
   });
 
-  this.getSprite = function() {
-    return {
-      animation: this.animation,
-      height: 128,
-      width: 64
-    };
+  $playground.addSprite(this.id, {
+    animation: this.animation,
+    height: 128,
+    width: 64
+  });
+
+  this.getDomElement = function() {
+    return $("#" + this.id);
   };
 }
