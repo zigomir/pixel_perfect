@@ -41,6 +41,9 @@ function Projectile(type, $playground, shooter) {
     if (this.domElement.length > 0) {
       this.domElement.x(30, true);
     }
+    if (this.domElement.x() > OPTIONS.playgroundWidth) {
+      this.remove();
+    }
   };
 
   var that = this;
@@ -55,10 +58,6 @@ function Projectile(type, $playground, shooter) {
   this.collide = function(projectileId, designerId) {
     var attackedDesigner = gameObjects.designers[designerId];
     var projectile = gameObjects.projectiles[projectileId];
-
-    if (projectile === undefined) {
-      console.log("Damn undefined projectile");
-    }
 
     attackedDesigner.hp -= projectile.damage;
 

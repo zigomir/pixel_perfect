@@ -69,8 +69,8 @@ $(function() {
     });
 
     $.each(gameObjects.projectiles, function(index, projectile) {
-      projectile.flyToTarget();
       projectile.checkCollision();
+      projectile.flyToTarget();
     });
 
   }, OPTIONS.refreshRate);
