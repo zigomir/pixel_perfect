@@ -6,12 +6,12 @@ $(function() {
     height: 800,
     width: 600,
     refreshRate: 60
-  })
-  .addSprite("sprite1");
-
+  });
 
   $playground.startGame(function(){
-    console.log("Game started!")
+    var dev = new Developer("destroyer");
+
+    $playground.addSprite(dev.name, dev.getSprite());
   });
 
 });
