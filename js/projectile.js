@@ -18,7 +18,7 @@ function Projectile(type, $playground, shooter) {
       rate: 0,
       offsetx: 0,
       offsety: 512,
-      type: $.gQ.ANIMATION_HORIZONTAL
+      type: $.gQ.ANIMATION_HORIZONTAL | $.gQ.ANIMATION_ONCE
     }),
 
     new $.gQ.Animation({
@@ -28,7 +28,7 @@ function Projectile(type, $playground, shooter) {
       rate: 0,
       offsetx: 20,
       offsety: 512,
-      type: $.gQ.ANIMATION_HORIZONTAL
+      type: $.gQ.ANIMATION_HORIZONTAL | $.gQ.ANIMATION_ONCE
     })
   ];
 

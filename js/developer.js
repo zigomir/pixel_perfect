@@ -33,10 +33,11 @@ function Developer(type, $playground, lane) {
 
   this.animation = new $.gQ.Animation({
     imageURL: "img/sprite.png",
-    numberOfFrame: 3,
-    delta: 64,
-    rate: 150,
-    type: $.gQ.ANIMATION_HORIZONTAL | $.gQ.ANIMATION_PINGPONG
+    numberOfFrame: 1,
+    delta: 0,
+    offsetx: 64,
+    rate: 0,
+    type: $.gQ.ANIMATION_HORIZONTAL | $.gQ.ANIMATION_ONCE
   });
 
   this.shoot = function() {
