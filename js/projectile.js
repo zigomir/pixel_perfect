@@ -28,14 +28,22 @@ function Projectile(type, $playground, shooter) {
     })
   ];
 
-  this.createSprite(
+  this.createGroup(
     $playground,
-    this.animations[Math.round(Math.random())],
     HEIGHT,
     20,
     shooter.domElement.x() + shooter.domElement.w(),
-    shooter.domElement.y() + shooter.domElement.h()/2 - HEIGHT/2
+    shooter.domElement.y() + shooter.domElement.h()/2 - HEIGHT/2,
+    [
+      {
+        name: "main",
+        animation: this.animations[Math.round(Math.random())],
+        height: HEIGHT,
+        width: 20
+      }
+    ]
   );
+
 
   this.flyToTarget = function() {
     if (this.domElement.length > 0) {
@@ -48,7 +56,7 @@ function Projectile(type, $playground, shooter) {
 
   var that = this;
   this.checkCollision = function() {
-    this.domElement.collision("[id^=designer_]").each(function(index, element) {
+    this.domElement.collision(".designer").each(function(index, element) {
       if (index === 0) {
         that.collide(that.id, $(element).prop("id"));
       }
@@ -62,8 +70,15 @@ function Projectile(type, $playground, shooter) {
     attackedDesigner.hp -= projectile.damage;
 
     if (attackedDesigner.hp <= 0) {
-      attackedDesigner.remove();
       bankAccount.increaseBalance(attackedDesigner.healthInsurance);
+      attackedDesigner.walkSpeed = 0;
+      attackedDesigner.domElement
+        .removeClass("designer")
+        .setAnimation(attackedDesigner.animations.death, function(attackedDesigner) {
+
+          console.log("DEATH!")
+          attackedDesigner.remove();
+        });
     }
 
     projectile.remove();

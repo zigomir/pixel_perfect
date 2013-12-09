@@ -33,5 +33,37 @@ GameObject.prototype.createSprite = function($playground, animation, height, wid
     }
 	);
 
-	this.domElement = $("#" + this.id);
+	this.domElement = $("#" + this.id).addClass(this.type);
+};
+
+GameObject.prototype.createGroup = function($playground, height, width, posx, posy, sprites) {
+  $playground.addGroup(
+    this.id, 
+    {
+      height: height || 32,
+      width: width || 32,
+      posx: posx || 0,
+      posy: posy || 0
+    }
+  );
+
+  var newGroup = $("#" + this.id);
+
+  var that = this;
+  $.each(sprites, 
+    function(index, sprite) {
+      newGroup.addSprite(
+        that.id + "_" + sprite.name, 
+        {
+          animation: sprite.animation || that.animation,
+          height: sprite.height || 32,
+          width: sprite.width || 32,
+          posx: sprite.posx || 0,
+          posy: sprite.posy || 0
+        }
+      ).addClass(sprite.name);
+    }
+  );
+
+  this.domElement = $("#" + this.id).addClass(this.type);
 };

@@ -73,13 +73,20 @@ function Developer(type, $playground, lane) {
     return count;
   };
 
-  this.createSprite(
+  this.createGroup(
     $playground,
-    null,
     OPTIONS.laneHeight,
     OPTIONS.slotWidth,
     this.getNeighboursCount() * OPTIONS.slotWidth,
-    (lane - 1) * OPTIONS.laneHeight
+    (lane - 1) * OPTIONS.laneHeight,
+    [
+      {
+        name: "main",
+        animation: this.animation,
+        height: OPTIONS.laneHeight,
+        width: OPTIONS.slotWidth
+      }
+    ]
   );
 
   var healthBar = $('<div class="health-bar" id="health-bar-' + this.id + '" style="top:' + (lane - 1) * OPTIONS.laneHeight + 'px; left: ' + this.getNeighboursCount() * OPTIONS.slotWidth + 'px"></div>');

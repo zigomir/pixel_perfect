@@ -5,22 +5,33 @@ function Designer(type, $playground, lane) {
   this.hp               = 100;
   this.ap               = 30;
   this.lane             = lane;
+  this.walkSpeed        = 0;
   // the amount of money that is earned for killing this foe
   this.healthInsurance  = 10;
 
-  this.animation = new $.gQ.Animation({
-    imageURL: "img/sprite.png",
-    numberOfFrame: 3,
-    delta: 64,
-    rate: 150,
-    offsetx: 0,
-    offsety: 384,
-    type: $.gQ.ANIMATION_HORIZONTAL | $.gQ.ANIMATION_PINGPONG
-  });
+  this.animations = {
+    walkLeft : new $.gQ.Animation({
+      imageURL: "img/sprite.png",
+      numberOfFrame: 3,
+      delta: 64,
+      rate: 150,
+      offsetx: 0,
+      offsety: 384,
+      type: $.gQ.ANIMATION_HORIZONTAL | $.gQ.ANIMATION_PINGPONG
+    }),
+
+    death : new $.gQ.Animation({
+      imageURL: "img/designer_death.png",
+      numberOfFrame: 4,
+      delta: 120,
+      rate: 300,
+      type: $.gQ.ANIMATION_HORIZONTAL | $.gQ.ANIMATION_CALLBACK
+    })
+  };
 
   this.createSprite(
     $playground,
-    null,
+    this.animations.walkLeft,
     128,
     64,
     500,
@@ -29,7 +40,7 @@ function Designer(type, $playground, lane) {
 
   this.walkToKill = function() {
     if (this.domElement.length > 0) {
-      this.domElement.x(-5, true);
+      this.domElement.x(this.walkSpeed, true);
     }
   };
 
